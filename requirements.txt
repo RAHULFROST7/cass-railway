@@ -7,3 +7,4 @@ MarkupSafe
 Werkzeug
 pypdf
 pdfminer.six
+requests
