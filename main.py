@@ -77,7 +77,18 @@ class PO_num_extracter:
                 invoice_numbers.append(self.extract_invoice_number(text)[0])
                 
         return invoice_numbers[0] if invoice_numbers else None
-    
+
+@app.route("/")
+def explain():
+    return """
+    Welcome to our PDF Text Extraction Service! 
+    <br><br>
+    Please use one of the following endpoints:
+    <br><br>
+    <b>/extractPO</b> - Extracts the Purchase Order (PO) number using Regular Expressions.
+    <br><br>
+    <b>/get_text</b> - Returns the text extracted from the provided PDF.
+    """
     
 @app.route("/extractPO",methods=['POST'])
 def extractor():
