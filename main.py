@@ -32,6 +32,7 @@ class PO_num_extracter:
             response = requests.get(self.pdf_path_or_url)
             if response.status_code == 200:
                 self.flag = True
+                self.log("Done downloading pdf")
                 return response.content
                 
             else:
@@ -101,6 +102,7 @@ def text_parser():
         if pth_url:
             obj = PO_num_extracter(pth_url)
             invoice_num = obj.extract_data()
+            obj.log("Successfully sent back data")
             return jsonify({'text': invoice_num[0]}), 200
     else:
         return jsonify({'error': 'String parameter is missing'}), 400
