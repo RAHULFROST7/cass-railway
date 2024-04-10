@@ -7,4 +7,3 @@ MarkupSafe
 Werkzeug
 pypdf
 pdfminer.six
-textwrap
