@@ -11,3 +11,4 @@ requests
 easyocr
 spire.doc
 pillow
+libicu-dev
