@@ -96,16 +96,24 @@ class PO_num_extracter:
     def get_text_img(self):
         
         data = self.download_url()
-        
+    
         if data:
             image = Image.open(BytesIO(data))
+            
+            # Resize the image to reduce memory consumption
+            max_width = 1024  # Adjust as needed
+            if image.width > max_width:
+                scale_factor = max_width / image.width
+                new_height = int(image.height * scale_factor)
+                image = image.resize((max_width, new_height))
+            
             reader = easyocr.Reader(['en'])
             result = reader.readtext(image=image)
             detected_text = ' '.join([text for (bbox, text, prob) in result])
             
             return detected_text
-        
-        else: return None
+        else:
+            return None
     
     def get_text_csv(self):
         
