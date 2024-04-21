@@ -8,3 +8,6 @@ Werkzeug
 pypdf
 pdfminer.six
 requests
+easyocr
+spire.doc
+pillow
