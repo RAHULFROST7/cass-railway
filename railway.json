@@ -1,16 +1,16 @@
 {
     "$schema": "https://railway.app/railway.schema.json",
     "build": {
-        "builder": "NIXPACKS",
+        "builder": "NIXPACKS"
     },
     "deploy": {
-        "startCommand": "gunicorn main:app",
-        "restartPolicyType": "ON_FAILURE",
-        "restartPolicyMaxRetries": 10,
-        "runtimeOptions": {
-            "configProperties": {
-                "System.Globalization.Invariant": true
+            "startCommand": "gunicorn main:app",
+            "restartPolicyType": "ON_FAILURE",
+            "restartPolicyMaxRetries": 10,
+            "runtimeOptions": {
+                "configProperties": {
+                    "System.Globalization.Invariant": true
+                }
             }
         }
-    }
 }
