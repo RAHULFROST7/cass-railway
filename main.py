@@ -4,6 +4,7 @@ import re
 import easyocr
 import textwrap
 import requests
+import numpy as np
 from PIL import Image
 from io import BytesIO
 from pypdf import PdfReader
@@ -93,25 +94,45 @@ class PO_num_extracter:
         else: return None
         
         
-    def get_text_img(self):
+    # def get_text_img(self):
         
+    #     data = self.download_url()
+    
+    #     if data:
+    #         image = Image.open(BytesIO(data))
+            
+    #         # Resize the image to reduce memory consumption
+    #         max_width = 1024  # Adjust as needed
+    #         if image.width > max_width:
+    #             scale_factor = max_width / image.width
+    #             new_height = int(image.height * scale_factor)
+    #             image = image.resize((max_width, new_height))
+            
+    #         reader = easyocr.Reader(['en'])
+    #         result = reader.readtext(image=image)
+    #         detected_text = ' '.join([text for (bbox, text, prob) in result])
+            
+    #         return detected_text
+    #     else:
+    #         return None
+    
+    def get_text_img(self):
+            
         data = self.download_url()
     
         if data:
             image = Image.open(BytesIO(data))
             
-            # Resize the image to reduce memory consumption
-            max_width = 1024  # Adjust as needed
-            if image.width > max_width:
-                scale_factor = max_width / image.width
-                new_height = int(image.height * scale_factor)
-                image = image.resize((max_width, new_height))
+            # Convert PIL image to NumPy array
+            image_np = np.array(image)
             
+            # Perform OCR on the NumPy array
             reader = easyocr.Reader(['en'])
-            result = reader.readtext(image=image)
+            result = reader.readtext(image_np)
             detected_text = ' '.join([text for (bbox, text, prob) in result])
             
             return detected_text
+        
         else:
             return None
     
